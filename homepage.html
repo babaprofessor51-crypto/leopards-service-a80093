@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Leopard's Courier Services</title>
+
+<style>
+
+:root{
+--primary:#FFC107;
+--dark:#2d2d2d;
+--light:#f5f5f5;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:var(--light);
+}
+
+/* HEADER */
+header{
+background:white;
+padding:15px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.logo img{
+height:45px;
+display:block;
+}
+
+.menu{
+font-size:28px;
+cursor:pointer;
+}
+
+/* HERO */
+.hero{
+height:420px;
+background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d');
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+padding:20px;
+}
+
+/* TRACK */
+.track{
+background:white;
+padding:30px 20px;
+text-align:center;
+}
+
+.track input{
+width:100%;
+max-width:500px;
+padding:14px;
+border:1px solid #ccc;
+border-radius:5px;
+margin-top:10px;
+}
+
+.track button{
+margin-top:10px;
+padding:14px 25px;
+border:none;
+background:var(--primary);
+font-weight:bold;
+cursor:pointer;
+}
+
+/* QUICK */
+.quick{
+padding:20px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+text-align:center;
+}
+
+.box{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+font-weight:bold;
+cursor:pointer;
+}
+
+/* INFO BOX */
+.infoBox{
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+width:90%;
+max-width:420px;
+padding:20px;
+border-radius:12px;
+z-index:999;
+box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">
+<img src="png.jpg">
+</div>
+<div class="menu">☰</div>
+</header>
+
+<section class="hero">
+<div>
+<h1>Leopard's Courier Services</h1>
+<p>Track, Ship & Deliver Across The Country</p>
+</div>
+</section>
+
+<section class="track">
+<h2>Track Your Shipment</h2>
+<input id="trackInput" placeholder="Enter Tracking ID">
+<br>
+<button onclick="track()">TRACK NOW</button>
+<div id="result"></div>
+</section>
+
+<section class="quick">
+
+<div class="box" onclick="locate()">📍 Locate Us</div>
+<div class="box" onclick="rate()">💰 Rate Calculator</div>
+<div class="box" onclick="duplicate()">📝 Duplicate Slip</div>
+<div class="box" onclick="eco()">🛒 E-Commerce</div>
+<div class="box" onclick="showServices()">🚚 Services</div>
+<div class="box" onclick="showSupport()">☎️ Support</div>
+
+</section>
+
+<div id="infoBox" class="infoBox"></div>
+
+<script>
+
+/* SHOW BOX */
+function showBox(text){
+let box=document.getElementById("infoBox");
+box.style.display="block";
+box.innerHTML=text;
+}
+
+/* TRACK */
+function track(){
+let input=document.getElementById("trackInput").value.trim();
+
+if(input==="KI0605813169"){
+document.getElementById("result").innerHTML=
+`<div style="background:white;padding:15px;margin-top:15px;border-radius:10px;">
+<b>Status:</b> Dispatched from Karachi<br>
+<b>Update:</b> On the way 🚚<br>
+<b>Destination:</b> Lahore
+</div>`;
+}
+else{
+document.getElementById("result").innerHTML="❌ Tracking Not Found";
+}
+}
+
+/* LOCATE */
+function locate(){
+showBox("📍 Karachi, Sindh, Pakistan");
+}
+
+/* RATE */
+function rate(){
+let r=Math.floor(Math.random()*(4000-3200+1))+3200;
+showBox("💰 Estimated Rate: Rs " + r);
+}
+
+/* DUPLICATE SLIP (FIXED ONLY THIS) */
+function duplicate(){
+
+let id = prompt("Enter Tracking Number:");
+
+if(!id){
+alert("Please enter tracking ID");
+return;
+}
+
+id = id.trim();
+
+if(id !== "KI0605813169"){
+alert("Invalid Tracking ID");
+return;
+}
+
+showBox(`
+
+<div style="text-align:left;font-size:14px;line-height:1.5">
+
+<h2 style="text-align:center">Leopards Courier Services (Pvt) Ltd.</h2>
+<p style="text-align:center">19 F Block 6 PECHS, Karachi</p>
+
+<hr>
+
+<h3>Shipment Information</h3>
+
+<p><b>Tracker No:</b> ${id}</p>
+<p><b>User:</b> SARFARAZ</p>
+<p><b>Booking Date/Time:</b> 29 May 2025 11:41 AM</p>
+<p><b>Origin:</b> KARACHI</p>
+<p><b>Destination:</b> LAHORE</p>
+
+<hr>
+
+<h3>Customer Copy</h3>
+<p><b>To:</b> Ali Ahmed</p>
+<p><b>Address:</b> KEMU Hostel Lahore</p>
+<p><b>Contact:</b> 03198779090</p>
+
+<hr>
+
+<h3>From</h3>
+<p><b>SARFARAZ</b></p>
+<p>Gulshan-e-Hadeed Karachi</p>
+
+<hr>
+
+<h3>Price Info</h3>
+<p><b>Weight:</b> 5 KG</p>
+<p><b>Total:</b> 2600 Rs</p>
+<p><b>Service:</b> Economy with Insurance</p>
+
+<br>
+
+<div style="text-align:center">
+<button onclick="document.getElementById('infoBox').style.display='none'"
+style="padding:10px 18px;background:black;color:white;border:none;border-radius:6px">
+Close
+</button>
+</div>
+
+</div>
+
+`);
+
+}
+
+/* E-COMMERCE */
+function eco(){
+showBox("❌ Server Problem");
+}
+
+/* SERVICES */
+function showServices(){
+showBox("🚚 Express / Warehousing / Logistics");
+}
+
+/* SUPPORT */
+function showSupport(){
+showBox("☎️ 111-300-786");
+}
+
+</script>
+
+</body>
+</html>
